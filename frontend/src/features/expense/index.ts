@@ -1,0 +1,1 @@
+export { ExpensePage } from "./pages/Expense.page";

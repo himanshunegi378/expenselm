@@ -3276,6 +3276,7 @@ export namespace Prisma {
     id: string | null
     amount: Decimal | null
     description: string | null
+    notes: string | null
     date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3287,6 +3288,7 @@ export namespace Prisma {
     id: string | null
     amount: Decimal | null
     description: string | null
+    notes: string | null
     date: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3298,6 +3300,7 @@ export namespace Prisma {
     id: number
     amount: number
     description: number
+    notes: number
     date: number
     createdAt: number
     updatedAt: number
@@ -3319,6 +3322,7 @@ export namespace Prisma {
     id?: true
     amount?: true
     description?: true
+    notes?: true
     date?: true
     createdAt?: true
     updatedAt?: true
@@ -3330,6 +3334,7 @@ export namespace Prisma {
     id?: true
     amount?: true
     description?: true
+    notes?: true
     date?: true
     createdAt?: true
     updatedAt?: true
@@ -3341,6 +3346,7 @@ export namespace Prisma {
     id?: true
     amount?: true
     description?: true
+    notes?: true
     date?: true
     createdAt?: true
     updatedAt?: true
@@ -3439,6 +3445,7 @@ export namespace Prisma {
     id: string
     amount: Decimal
     description: string
+    notes: string | null
     date: Date
     createdAt: Date
     updatedAt: Date
@@ -3469,6 +3476,7 @@ export namespace Prisma {
     id?: boolean
     amount?: boolean
     description?: boolean
+    notes?: boolean
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3482,6 +3490,7 @@ export namespace Prisma {
     id?: boolean
     amount?: boolean
     description?: boolean
+    notes?: boolean
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3495,6 +3504,7 @@ export namespace Prisma {
     id?: boolean
     amount?: boolean
     description?: boolean
+    notes?: boolean
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3508,6 +3518,7 @@ export namespace Prisma {
     id?: boolean
     amount?: boolean
     description?: boolean
+    notes?: boolean
     date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3515,7 +3526,7 @@ export namespace Prisma {
     categoryId?: boolean
   }
 
-  export type ExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "description" | "date" | "createdAt" | "updatedAt" | "userId" | "categoryId", ExtArgs["result"]["expense"]>
+  export type ExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "description" | "notes" | "date" | "createdAt" | "updatedAt" | "userId" | "categoryId", ExtArgs["result"]["expense"]>
   export type ExpenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
@@ -3539,6 +3550,7 @@ export namespace Prisma {
       id: string
       amount: Prisma.Decimal
       description: string
+      notes: string | null
       date: Date
       createdAt: Date
       updatedAt: Date
@@ -3972,6 +3984,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Expense", 'String'>
     readonly amount: FieldRef<"Expense", 'Decimal'>
     readonly description: FieldRef<"Expense", 'String'>
+    readonly notes: FieldRef<"Expense", 'String'>
     readonly date: FieldRef<"Expense", 'DateTime'>
     readonly createdAt: FieldRef<"Expense", 'DateTime'>
     readonly updatedAt: FieldRef<"Expense", 'DateTime'>
@@ -4431,6 +4444,7 @@ export namespace Prisma {
     id: 'id',
     amount: 'amount',
     description: 'description',
+    notes: 'notes',
     date: 'date',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -4646,6 +4660,7 @@ export namespace Prisma {
     id?: StringFilter<"Expense"> | string
     amount?: DecimalFilter<"Expense"> | Decimal | DecimalJsLike | number | string
     description?: StringFilter<"Expense"> | string
+    notes?: StringNullableFilter<"Expense"> | string | null
     date?: DateTimeFilter<"Expense"> | Date | string
     createdAt?: DateTimeFilter<"Expense"> | Date | string
     updatedAt?: DateTimeFilter<"Expense"> | Date | string
@@ -4659,6 +4674,7 @@ export namespace Prisma {
     id?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    notes?: SortOrderInput | SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4675,6 +4691,7 @@ export namespace Prisma {
     NOT?: ExpenseWhereInput | ExpenseWhereInput[]
     amount?: DecimalFilter<"Expense"> | Decimal | DecimalJsLike | number | string
     description?: StringFilter<"Expense"> | string
+    notes?: StringNullableFilter<"Expense"> | string | null
     date?: DateTimeFilter<"Expense"> | Date | string
     createdAt?: DateTimeFilter<"Expense"> | Date | string
     updatedAt?: DateTimeFilter<"Expense"> | Date | string
@@ -4688,6 +4705,7 @@ export namespace Prisma {
     id?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    notes?: SortOrderInput | SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4707,6 +4725,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Expense"> | string
     amount?: DecimalWithAggregatesFilter<"Expense"> | Decimal | DecimalJsLike | number | string
     description?: StringWithAggregatesFilter<"Expense"> | string
+    notes?: StringNullableWithAggregatesFilter<"Expense"> | string | null
     date?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
@@ -4838,6 +4857,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4849,6 +4869,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4860,6 +4881,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4871,6 +4893,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4882,6 +4905,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4893,6 +4917,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4902,6 +4927,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5088,6 +5114,7 @@ export namespace Prisma {
     id?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    notes?: SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5103,6 +5130,7 @@ export namespace Prisma {
     id?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    notes?: SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5114,6 +5142,7 @@ export namespace Prisma {
     id?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    notes?: SortOrder
     date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5413,6 +5442,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5423,6 +5453,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5462,6 +5493,7 @@ export namespace Prisma {
     id?: StringFilter<"Expense"> | string
     amount?: DecimalFilter<"Expense"> | Decimal | DecimalJsLike | number | string
     description?: StringFilter<"Expense"> | string
+    notes?: StringNullableFilter<"Expense"> | string | null
     date?: DateTimeFilter<"Expense"> | Date | string
     createdAt?: DateTimeFilter<"Expense"> | Date | string
     updatedAt?: DateTimeFilter<"Expense"> | Date | string
@@ -5473,6 +5505,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5483,6 +5516,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5615,6 +5649,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5625,6 +5660,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5635,6 +5671,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5645,6 +5682,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5655,6 +5693,7 @@ export namespace Prisma {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    notes?: string | null
     date: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5665,6 +5704,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5675,6 +5715,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5685,6 +5726,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
