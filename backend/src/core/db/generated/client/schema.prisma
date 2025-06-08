@@ -38,6 +38,7 @@ model Expense {
   id          String   @id @default(uuid())
   amount      Decimal  @db.Decimal(10, 2)
   description String
+  notes       String?  @db.Text
   date        DateTime
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")

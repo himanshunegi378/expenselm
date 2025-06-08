@@ -140,6 +140,7 @@ exports.Prisma.ExpenseScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
   description: 'description',
+  notes: 'notes',
   date: 'date',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

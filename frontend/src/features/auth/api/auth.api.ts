@@ -1,16 +1,8 @@
 import axios from 'axios';
 import type { SignupFormData, SignupResponse, User, LoginFormData, LoginResponse } from '../types/auth.types';
 import { isErrorResponse, isSuccessResponse, type ApiResponse } from '../../../types/response.types';
+import { axiosInstance } from '../../../shared/axiosInstance';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
-
-const axiosInstance = axios.create({
-  baseURL: API_URL,
-  withCredentials: true, // Necessary for cookies
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
 
 /**
  * Register a new user
