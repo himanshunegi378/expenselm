@@ -11,6 +11,7 @@ type FormInputProps = {
   name: string;
   error?: FieldError;
   className?: string;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 };
 
 export const FormInput: React.FC<FormInputProps> = ({
@@ -23,6 +24,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   name,
   error,
   className = '',
+  inputProps,
 }) => {
   return (
     <div>
@@ -37,7 +39,8 @@ export const FormInput: React.FC<FormInputProps> = ({
         {...register(name)}
         className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
           error ? 'border-red-500' : 'border-gray-300'
-        } ${className}`}
+        } ${className}` }
+        {...inputProps}
       />
       {error && <p className="mt-1 text-sm text-red-600">{error.message}</p>}
     </div>

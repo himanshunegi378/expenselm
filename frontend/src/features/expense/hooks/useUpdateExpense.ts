@@ -4,9 +4,9 @@ import type { Expense } from "../types/expense.types";
 
 export const useUpdateExpense = () => {
     const queryClient = useQueryClient();
-    
+
     const { mutateAsync, isPending, error, isError } = useMutation({
-        mutationFn: ({ id, data }: { id: string; data: Partial<Omit<Expense, 'id'>> }) => 
+        mutationFn: ({ id, data }: { id: string; data: Partial<Omit<Expense, 'id'>> }) =>
             updateExpense(id, data),
         onSuccess: (data, variables) => {
             // Invalidate and refetch expenses queries
@@ -15,12 +15,10 @@ export const useUpdateExpense = () => {
         },
     });
 
-    const handleUpdateExpense = async (id: string, data: Partial<Omit<Expense, 'id'>>) => {
-        return mutateAsync({ id, data });
-    };
+
 
     return {
-        updateExpense: handleUpdateExpense,
+        updateExpense: mutateAsync,
         isLoading: isPending,
         error,
         isError,

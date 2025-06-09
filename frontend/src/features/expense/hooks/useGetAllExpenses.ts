@@ -9,10 +9,10 @@ export const useGetAllExpenses = () => {
 
     const {
         data: expenses = [],
-        isLoading,
         error,
         isError,
         refetch,
+        isFetching,
     } = useQuery({
         queryKey: ['expenses'],
         queryFn: getAllExpenses,
@@ -26,9 +26,11 @@ export const useGetAllExpenses = () => {
 
     return {
         expenses,
-        isLoading,
+        isLoading: isFetching,
         error,
         isError,
         refetch,
     };
 }
+
+useGetAllExpenses.queryKey = ['expenses'];

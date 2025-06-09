@@ -6,6 +6,8 @@ import { ProtectedRoute, PublicRoute } from './features/auth';
 import { ExpensePage } from './features/expense';
 import { Fragment } from 'react/jsx-runtime';
 import AddExpenseForm from './features/expense/components/AddExpense/AddExpenseForm';
+import { AddExpensePage } from './features/expense/pages/AdddExpense.page';
+import { UpdateExpensePage } from './features/expense/pages/updateExpense.page';
 
 function App() {
   return (
@@ -22,8 +24,9 @@ function App() {
           <Route element={<ProtectedRoute redirectPath="/login" />}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path='expense' element={<ExpensePage />}>
-            <Route index element={<Fragment />} />
-            <Route path="add" element={<AddExpenseForm date={new Date().toISOString()} onSuccess={() => {}} />} />
+            <Route path="add" element={<AddExpensePage />} />
+            <Route path="update/:id" element={<UpdateExpensePage />} />
+
             </Route>
           </Route>
 
