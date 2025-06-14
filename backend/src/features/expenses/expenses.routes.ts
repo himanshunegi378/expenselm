@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction, RequestHandler } from 'express';
 import { ExpensesController } from './expenses.controller';
-import { expenseInputSchema, expenseUpdateSchema } from './expenses.validation';
+import { categoryOrderedByLikelinesSchema, expenseInputSchema, expenseUpdateSchema } from './expenses.validation';
 import { validate } from '../../utils/validation';
 import { authenticate } from '../auth/middleware/auth.middleware';
 
@@ -58,6 +58,11 @@ router.delete('/:id',
 // Category routes
 router.get('/categories/all',
     asyncHandler(expensesController.getAllCategories)
+);
+
+router.post('/categories/orderedByLikeliness',
+    validate(categoryOrderedByLikelinesSchema),
+    asyncHandler(expensesController.getAllCategoriesOrderedByLikeliness)
 );
 
 router.post('/categories',

@@ -3,6 +3,8 @@ import { ExpensesService } from './expenses.services';
 import { ExpenseInputValidated, ExpenseUpdateInputValidated } from './expenses.type';
 import { formatSuccess, formatError, AppError } from '../../core/utils/responseFormatter';
 import { ExpenseErrorDefinitions } from './expense.errors';
+import { categoryOrderedByLikelinesSchema } from './expenses.validation';
+import { z } from 'zod';
 
 export class ExpensesController {
     private expensesService: ExpensesService;
@@ -140,6 +142,19 @@ export class ExpensesController {
     getAllCategories = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const categories = await this.expensesService.getAllCategories();
+            res.status(200).json(formatSuccess(categories, 'Categories retrieved successfully'));
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    /**
+     * Get all available categories ordered by likeliness
+     */
+    getAllCategoriesOrderedByLikeliness = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const validatedInput = req.body as z.infer<typeof categoryOrderedByLikelinesSchema>;
+            const categories = await this.expensesService.getAllCategoriesOrderedByLikeliness(validatedInput);
             res.status(200).json(formatSuccess(categories, 'Categories retrieved successfully'));
         } catch (error) {
             next(error);

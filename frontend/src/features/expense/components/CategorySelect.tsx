@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createFilter } from 'react-select';
 import Creatable from 'react-select/creatable';
 import { toast } from 'sonner';
-import { useGetAllCategories } from '../hooks/useGetAllCategories';
+import { useGetAllCategoriesOrderedByLikeliness } from '../hooks/useGetAllCategoriesOrderedByLikeliness';
 import { useCreateCategory } from '../hooks/useCreateCategory';
 
 export interface CategoryOption {
@@ -19,16 +19,20 @@ interface CategorySelectProps {
     value: string | null; // Category ID
     onChange: (value: string | null) => void;
     placeholder?: string;
+    description?: string;
+    notes?: string;
 }
 
 export const CategorySelect = ({
     value,
+    description = '',
+    notes = '',
     onChange,
     placeholder = 'Select or create a category...'
 }: CategorySelectProps) => {
     const [isCreating, setIsCreating] = useState(false);
 
-    const { categories, isLoading: isLoadingCategories, refetch } = useGetAllCategories();
+    const { categories, isLoading: isLoadingCategories, refetch } = useGetAllCategoriesOrderedByLikeliness({ description, notes });
     const { createCategory } = useCreateCategory();
 
     const categoryOptions = categories.map(category => ({

@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import z from "zod";
 import { AlertBox, FormContainer, FormInput, FormTextArea, SubmitButton } from "../../../../shared/ui";
 import { useCreateExpense } from "../../hooks/useCreateExpense";
@@ -52,6 +52,11 @@ const AddExpenseForm = ({
             resolver: zodResolver(expenseFormSchema)
         }
     );
+
+    const [description, notes] = useWatch({
+        control: form.control,
+        name: ['description', 'notes']
+    })
 
     const onSubmit = async (data: z.infer<typeof expenseFormSchema>) => {
         try {
@@ -131,6 +136,8 @@ const AddExpenseForm = ({
                         control={form.control}
                         render={({ field }) => (
                             <CategorySelect
+                                description={description}
+                                notes={notes}
                                 value={field.value}
                                 onChange={field.onChange} // Simplified onChange handler
                                 placeholder="Select or create a category..."

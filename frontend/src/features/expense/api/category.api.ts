@@ -46,4 +46,22 @@ export const createCategory = async (categoryData: Omit<Category, 'id'>) => {
     }
 }
 
+export const getAllCategoriesOrderedByLikeliness = async (categoryData: {description?: string, notes?: string}) => {
+    try {
+        const { data } = await axiosInstance.post<ApiResponse<Category[]>>("expenses/categories/orderedByLikeliness", categoryData);
+        if (!isSuccessResponse(data)) {
+            throw new Error(data.error.message);
+        }
+        return data.data;
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            if (isErrorResponse(error.response.data)) {
+                throw new Error(error.response.data.error.message);
+            }
+        }
+        console.log(error);
+        throw new Error('An unknown error occurred while creating category');
+    }
+}
+
     

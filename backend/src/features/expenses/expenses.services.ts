@@ -6,6 +6,7 @@ import { ErrorDefinition } from '../../@types/error.types';
 import { ExpenseErrorDefinitions } from './expense.errors';
 import { ExpenseInputValidated, ExpenseUpdateInputValidated, ExpenseFilters } from './expenses.type';
 import { expenseInputSchema, expenseUpdateSchema } from './expenses.validation';
+import { likelyCategory } from '../ai/likelyCategory';
 
 const db = prisma;
 
@@ -319,6 +320,28 @@ export class ExpensesService {
                 name: 'asc'
             }
         });
+    }
+
+    async getAllCategoriesOrderedByLikeliness({
+        description,
+        notes,
+    }:{
+        description?: string;
+        notes?: string | null;
+    }) {
+      const allCategories = await this.getAllCategories();
+      const likelyCategories = await likelyCategory({
+        description,
+        notes,
+        categories: allCategories
+      });
+      
+    //   merge likelyCategories with getAllCategories with likelyCategory at top
+    //  remove duplicates without deleting any category from  likelyCategories
+    const mergedCategories = [...likelyCategories, ...allCategories];
+    const uniqueCategories = mergedCategories.filter((category, index) => mergedCategories.findIndex(c => c.id === category.id) === index);  
+
+      return uniqueCategories;
     }
 
     /**

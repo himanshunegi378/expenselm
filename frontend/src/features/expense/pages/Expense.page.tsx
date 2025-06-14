@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate, useOutlet, useParams } from 'react-router-dom';
 import { PlusIcon, Edit, Trash2 } from 'lucide-react';
 
 import { AlertBox } from '../../../shared/ui';
@@ -8,6 +8,7 @@ import { useDeleteExpense } from '../hooks/useDeleteExpense';
 import { Category } from '../components/Category';
 import { DateNavigator } from '../ui/DateNavigator';
 import type { Expense } from '../types/expense.types';
+import { format } from 'date-fns';
 
 // *******************************************************************
 // 1. Dedicated, Responsive ExpenseItem Component (Card UI)
@@ -71,7 +72,7 @@ const ExpenseItem = ({ expense, onEdit, onDelete, isDeleting }: ExpenseItemProps
 export const ExpensePage = () => {
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString());
-    
+
     // Hooks remain the same
     const { expenses, isLoading, isError, error } = useGetAllExpenses(); // Assuming this hook filters by date or you do it client-side
     const { deleteExpense } = useDeleteExpense();
@@ -95,10 +96,12 @@ export const ExpensePage = () => {
     const handleEdit = (id: string) => {
         navigate(`/expense/update/${id}`);
     };
-    
+
     // Filter expenses based on the selected date (client-side example)
     // For performance, it's better to fetch filtered data from the server
     const filteredExpenses = useMemo(() => {
+
+
         return expenses?.filter(expense => {
             const expenseDate = new Date(expense.date).toDateString();
             const selected = new Date(selectedDate).toDateString();
@@ -156,4 +159,18 @@ export const ExpensePage = () => {
             </button>
         </div>
     );
+};
+
+export const ExpensePageWrapper = () => {
+    const outlet = useOutlet();
+    const { date } = useParams<{ date: string }>(); // date in fromat yyyy-MM-dd
+
+    if(!date) {
+        // using date-fns
+        const date = format(new Date(), 'yyyy-MM-dd');
+        return <Navigate to={`/expense/${date}`} />;
+    }
+
+
+    return outlet;
 };

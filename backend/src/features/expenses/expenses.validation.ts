@@ -14,6 +14,11 @@ export const expenseInputSchema = z.object({
   categoryId: z.string().min(1, 'Category is required'),
 });
 
+export const categoryOrderedByLikelinesSchema = z.object({
+    description: z.string().optional(),
+    notes: z.string().optional().nullable(),
+})
+
 export const expenseUpdateSchema = expenseInputSchema.partial();
 
 
