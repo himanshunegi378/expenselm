@@ -3,22 +3,7 @@
  * Centralized response formatter for consistent API responses
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatError = exports.formatSuccess = exports.AppError = void 0;
-class AppError extends Error {
-    constructor(errorDef, details) {
-        super(errorDef.message);
-        this.errorDef = errorDef;
-        this.details = details;
-        this.name = errorDef.code;
-        this.errorDef = errorDef;
-        this.details = details;
-        this.stack = (new Error()).stack;
-    }
-    format() {
-        return (0, exports.formatError)(this.errorDef, this.details);
-    }
-}
-exports.AppError = AppError;
+exports.formatError = exports.formatSuccess = void 0;
 // Response types are now imported from @types/error.types
 /**
  * Format a successful response

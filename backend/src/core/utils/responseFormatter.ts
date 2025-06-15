@@ -6,8 +6,8 @@ import { ErrorDefinition, SuccessResponse, ErrorResponse } from '../../@types/er
 import { z } from 'zod';
 
 
-export class AppError<T extends ErrorDefinition> extends Error {
-  constructor(public errorDef: T, private details?: z.infer<T['detailsSchema']>) {
+export class AppError extends Error {
+  constructor(public errorDef: ErrorDefinition, private details?: z.infer<typeof errorDef.detailsSchema>) {
     super(errorDef.message);
     this.name = errorDef.code;
     this.errorDef = errorDef;

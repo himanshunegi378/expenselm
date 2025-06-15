@@ -6,11 +6,5 @@ export const AppErrorDefinitions = {
         message: "Something went wrong",
         httpStatus: 500,
         detailsSchema: z.object({}).optional(),
-    },
-    DB_ERROR: {
-        code: "DB_ERROR",
-        message: "Database connection failed",
-        httpStatus: 500,
-        detailsSchema: z.object({ error: z.string() }),
-    },
+    }
 }

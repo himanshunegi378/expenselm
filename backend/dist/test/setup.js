@@ -15,12 +15,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.prismaTest = void 0;
 // Import the singleton prisma instance
+const prisma_1 = require("../core/db/prisma");
 const dotenv_1 = __importDefault(require("dotenv"));
 // Set NODE_ENV explicitly for tests
 process.env.NODE_ENV = 'test';
 // Load environment variables
 dotenv_1.default.config({ path: '.env.test' });
-const prisma_1 = require("../core/db/prisma");
 // Use the singleton Prisma instance for testing
 exports.prismaTest = prisma_1.prisma;
 // Global setup

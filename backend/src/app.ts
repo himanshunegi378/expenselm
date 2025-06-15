@@ -9,10 +9,8 @@ import expenseRoutes from './features/expenses/expenses.routes';
 
 // Import middleware
 import { AuthErrorDefinitions } from './features/auth';
-import { AppError, formatError, formatSuccess } from './core/utils/responseFormatter';
+import { AppError, formatError } from './core/utils/responseFormatter';
 import { AppErrorDefinitions } from './app.error';
-import { prisma } from './core/db/prisma';
-import { ErrorDefinition } from './@types/error.types';
 
 const app = express();
 
@@ -39,26 +37,13 @@ app.get('/api', (req: Request, res: Response) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/expenses', expenseRoutes);
 
-app.get('/api/dbCheck', async (req: Request, res: Response) => {
-  try {
-    // ping db using prisma because supabase hibernate if no activity for a week
-    await prisma.$queryRaw`SELECT 1`;
-    res.json(formatSuccess(null, 'Database connection successful'));
-  } catch (error) {
-    console.error('Database connection failed:', error);
-    throw new AppError(AppErrorDefinitions.DB_ERROR, {
-      error: error instanceof Error ? error.message : 'Unknown error while connecting to database'
-    });
-  }
-});
-
 // 404 handler
 app.use((req: Request, res: Response) => {
   res.status(404).json({ success: false, error: 'Not Found' });
 });
 
 // Custom error handler function with correct typing
-const handleErrors = (err: AppError<ErrorDefinition> | Error, req: Request, res: Response, next: NextFunction): void => {
+const handleErrors = (err: AppError | Error, req: Request, res: Response, next: NextFunction): void => {
   // Log the error
   console.error(err);
   if (!(err instanceof AppError)) {
