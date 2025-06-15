@@ -1,7 +1,6 @@
 // This file will run before all tests
 
 // Import the singleton prisma instance
-import { prisma } from '../core/db/prisma';
 import dotenv from 'dotenv';
 
 // Set NODE_ENV explicitly for tests
@@ -9,6 +8,7 @@ process.env.NODE_ENV = 'test';
 
 // Load environment variables
 dotenv.config({ path: '.env.test' });
+import { prisma } from '../core/db/prisma';
 
 // Use the singleton Prisma instance for testing
 export const prismaTest = prisma;

@@ -26,10 +26,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const prisma_1 = require("../../core/db/prisma");
 // Import prismaTest directly to avoid require() issues
-const setup_1 = require("../../test/setup");
 // Always use prismaTest during Jest tests to ensure consistent database access
-const db = setup_1.prismaTest;
+const db = prisma_1.prisma;
+const auth_errors_1 = require("./auth.errors");
+const responseFormatter_1 = require("../../core/utils/responseFormatter");
 class AuthService {
     /**
      * Register a new user
@@ -41,8 +43,7 @@ class AuthService {
                 where: { email: userData.email },
             });
             if (existingUser) {
-                const error = new Error('User with this email already exists');
-                error.statusCode = 409;
+                const error = new responseFormatter_1.AppError(auth_errors_1.AuthErrorDefinitions.USER_ALREADY_EXISTS);
                 throw error;
             }
             // Hash the password
@@ -73,15 +74,13 @@ class AuthService {
                 where: { email: loginData.email },
             });
             if (!user) {
-                const error = new Error('User not found');
-                error.statusCode = 404;
+                const error = new responseFormatter_1.AppError(auth_errors_1.AuthErrorDefinitions.USER_NOT_FOUND);
                 throw error;
             }
             // Check password
             const isPasswordValid = yield bcrypt_1.default.compare(loginData.password, user.password);
             if (!isPasswordValid) {
-                const error = new Error('Invalid credentials');
-                error.statusCode = 401;
+                const error = new responseFormatter_1.AppError(auth_errors_1.AuthErrorDefinitions.INVALID_CREDENTIALS);
                 throw error;
             }
             // Generate JWT
@@ -134,8 +133,7 @@ class AuthService {
             };
         }
         catch (error) {
-            const tokenError = new Error('Invalid token');
-            tokenError.statusCode = 401;
+            const tokenError = new responseFormatter_1.AppError(auth_errors_1.AuthErrorDefinitions.AUTH_INVALID_TOKEN);
             throw tokenError;
         }
     }
