@@ -18,7 +18,7 @@ export const signup = async (signupMutation: ReturnType<typeof useSignup>['signu
 export const login = async (loginMutation: ReturnType<typeof useSignin>['signin'], data: LoginFormData, navigate: NavigateFunction) => {
     try {
         const response = await loginMutation(data);
-        navigate('/dashboard');
+        navigate('/expense');
         store.dispatch(loginUser({ ...response.user, token: response.token }))
     } catch (error) {
         console.error(error);

@@ -11,7 +11,7 @@ interface PublicRouteProps {
  * Redirects authenticated users to the dashboard
  */
 export const PublicRoute = ({ 
-  redirectPath = '/dashboard' 
+  redirectPath = '/expense' 
 }: PublicRouteProps) => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
