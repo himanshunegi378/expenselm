@@ -1,19 +1,16 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { BottomSheet } from "../../../shared/ui"
-import AddExpenseForm from "../components/AddExpense/AddExpenseForm";
+import { useNavigate, useParams } from "react-router-dom";
 import { queryClient } from "../../../lib/react-query";
+import { BottomSheet } from "../../../shared/ui";
+import AddExpenseForm from "../components/AddExpense/AddExpenseForm";
 import { useGetAllExpenses } from "../hooks/useGetAllExpenses";
 
 export const AddExpensePage = () => {
     const navigate = useNavigate();
-    const { search } = useLocation()
-    const selectedDate = new URLSearchParams(search).get('date')
-
-
+    const { date: selectedDate } = useParams<{ date: string }>();
 
     return (
         <BottomSheet isOpen={true} onClose={() => {
-            navigate('/expense', {
+            navigate(`/expense/${selectedDate}`, {
                 replace: true
             })
         }}>
@@ -22,7 +19,7 @@ export const AddExpensePage = () => {
                     exact: true,
                     queryKey: useGetAllExpenses.queryKey
                 })
-                navigate('/expense')
+                navigate(`/expense/${selectedDate}`)
             }} />}
         </BottomSheet>
     )

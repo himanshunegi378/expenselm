@@ -69,9 +69,8 @@ const ExpenseItem = ({ expense, onEdit, onDelete, isDeleting }: ExpenseItemProps
 // *******************************************************************
 // 2. Main ExpensePage Component (Refactored)
 // *******************************************************************
-export const ExpensePage = () => {
+export const ExpensePage = ({ date }: { date: string }) => {
     const navigate = useNavigate();
-    const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString());
 
     // Hooks remain the same
     const { expenses, isLoading, isError, error } = useGetAllExpenses(); // Assuming this hook filters by date or you do it client-side
@@ -80,8 +79,9 @@ export const ExpensePage = () => {
     const [rowState, setRowState] = useState<{ [key: string]: 'idle' | 'deleting' }>({});
 
     const handleDateChange = (isoDateString: string) => {
-        setSelectedDate(isoDateString);
-        // You would typically refetch expenses for the new date here
+        // convert isoDateString to yyy-MM-dd
+        const date = format(isoDateString, 'yyyy-MM-dd');
+        navigate(`/expense/${date}`);
     };
 
     const handleDelete = (id: string) => {
@@ -104,10 +104,10 @@ export const ExpensePage = () => {
 
         return expenses?.filter(expense => {
             const expenseDate = new Date(expense.date).toDateString();
-            const selected = new Date(selectedDate).toDateString();
+            const selected = new Date(date).toDateString();
             return expenseDate === selected;
         }) ?? [];
-    }, [expenses, selectedDate]);
+    }, [expenses, date]);
 
 
     return (
@@ -118,7 +118,7 @@ export const ExpensePage = () => {
             </header>
 
             <div className="mb-6 space-y-4">
-                <DateNavigator value={selectedDate} onChange={handleDateChange} />
+                <DateNavigator value={date} onChange={handleDateChange} />
                 <Outlet />
             </div>
 
@@ -151,7 +151,7 @@ export const ExpensePage = () => {
 
             {/* --- 3. Improved Floating Action Button (FAB) --- */}
             <button
-                onClick={() => navigate(`/expense/add?date=${selectedDate}`)}
+                onClick={() => navigate(`add`)}
                 className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-blue-600 text-white rounded-full p-4 shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 transition-transform hover:scale-110"
                 aria-label="Add new expense"
             >
@@ -161,16 +161,23 @@ export const ExpensePage = () => {
     );
 };
 
+const isValidDate = (dateString?: string) => {
+    if (!dateString) {
+        return false;
+    }
+    // check if format is yyyy-MM-dd
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!regex.test(dateString)) {
+        return false;
+    }
+    return true;
+};
 export const ExpensePageWrapper = () => {
-    const outlet = useOutlet();
     const { date } = useParams<{ date: string }>(); // date in fromat yyyy-MM-dd
-
-    if(!date) {
-        // using date-fns
+    if (!date || !isValidDate(date)) {
         const date = format(new Date(), 'yyyy-MM-dd');
-        return <Navigate to={`/expense/${date}`} />;
+        return <Navigate to={`/expense/${date}`} replace />;
     }
 
-
-    return outlet;
+    return <ExpensePage date={date} />;
 };

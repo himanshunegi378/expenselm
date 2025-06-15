@@ -6,6 +6,8 @@ import { ProtectedRoute, PublicRoute } from './features/auth';
 import { ExpensePage } from './features/expense';
 import { AddExpensePage } from './features/expense/pages/AdddExpense.page';
 import { UpdateExpensePage } from './features/expense/pages/updateExpense.page';
+import { format } from 'date-fns';
+import { ExpensePageWrapper } from './features/expense/pages/Expense.page';
 
 function App() {
   return (
@@ -21,10 +23,12 @@ function App() {
           {/* Protected routes */}
           <Route element={<ProtectedRoute redirectPath="/login" />}>
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path='expense' element={<ExpensePage />}>
-            <Route path="add" element={<AddExpensePage />} />
-            <Route path="update/:id" element={<UpdateExpensePage />} />
-
+            <Route path='expense'>
+              <Route index element={<Navigate to={"/expense/" + format(new Date(), 'yyyy-MM-dd')} />} />
+              <Route path=':date' element={<ExpensePageWrapper />}>
+                <Route path="add" element={<AddExpensePage />} />
+                <Route path="update/:id" element={<UpdateExpensePage />} />
+              </Route>
             </Route>
           </Route>
 
