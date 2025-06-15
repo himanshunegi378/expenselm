@@ -7,14 +7,14 @@ import { useGetExpenseById } from "../hooks/useGetExpenseById";
 
 export const UpdateExpensePage = () => {
     const navigate = useNavigate();
-    const { id } = useParams<{ id: string }>()
+    const { id, date } = useParams<{ id: string, date: string }>()
     const { expense, isLoading, isError, error } = useGetExpenseById(id)
 
 
 
     return (
         <BottomSheet isOpen={true} onClose={() => {
-            navigate('/expense', {
+            navigate(`/expense/${date}`, {
                 replace: true
             })
         }}>
@@ -25,7 +25,7 @@ export const UpdateExpensePage = () => {
                     exact: true,
                     queryKey: useGetAllExpenses.queryKey
                 })
-                navigate('/expense')
+                navigate(`/expense/${date}`)
             }} />}
         </BottomSheet>
     )

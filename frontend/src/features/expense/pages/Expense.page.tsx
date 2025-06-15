@@ -94,7 +94,7 @@ export const ExpensePage = ({ date }: { date: string }) => {
     };
 
     const handleEdit = (id: string) => {
-        navigate(`/expense/update/${id}`);
+        navigate(`update/${id}`);
     };
 
     // Filter expenses based on the selected date (client-side example)
