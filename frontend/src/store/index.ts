@@ -6,10 +6,7 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
   },
-  middleware: (getDefaultMiddleware) => 
-    process.env.NODE_ENV !== 'production' 
-      ? getDefaultMiddleware().concat(logger)
-      : getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
