@@ -7,6 +7,6 @@ module.exports = {
 
   }],
   watch: false,
-  max_memory_restart: '100M',
+  max_memory_restart: '500M',
 
 };
