@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Navigate, Outlet, useNavigate, useOutlet, useParams } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { PlusIcon, Edit, Trash2 } from 'lucide-react';
 
 import { AlertBox } from '../../../shared/ui';

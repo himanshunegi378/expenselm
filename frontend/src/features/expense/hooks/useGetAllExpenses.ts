@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../../store";
 import { useQuery } from "@tanstack/react-query";
 import { getAllExpenses } from "../api/expense.api";
-import type { Expense } from "../types/expense.types";
 
 export const useGetAllExpenses = () => {
     const { isAuthenticated } = useSelector((state: RootState) => state.auth);

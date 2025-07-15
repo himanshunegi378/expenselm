@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { DashboardPage, SignupPage, SigninPage } from './pages';
 import { ProtectedRoute, PublicRoute } from './features/auth';
-import { ExpensePage } from './features/expense';
 import { AddExpensePage } from './features/expense/pages/AdddExpense.page';
 import { UpdateExpensePage } from './features/expense/pages/updateExpense.page';
 import { format } from 'date-fns';
